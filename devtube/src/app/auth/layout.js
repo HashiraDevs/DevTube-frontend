@@ -1,8 +1,7 @@
-import React from 'react'
 
 const AuthLayout = ({children}) => {
   return (
-    <main>
+    <main className='w-1512 h-982'>
         {children}
     </main>
   )
