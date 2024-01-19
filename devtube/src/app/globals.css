@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components{
+  .primary-btn-large{
+    @apply bg-blue-500 rounded-full h-10 w-64 text-white p-1
+  }
+}
+@layer components{
+  .input{
+    @apply flex flex-col items-start gap-2
+  }
+  .input label{
+    @apply font-normal text-base leading-normal block
+  }
+  .input input{
+    @apply border border-black border-solid w-[18.75rem] h-[2.5rem] rounded-[1.375rem]
+  }
+  .primary-btn-large{
+    @apply flex w-[18.75rem] px-[7rem] py-[0.625rem] items-center justify-center gap-[0.625rem] rounded-full bg-[#008BF8] text-[#FFF] text-center font-[1rem] font-bold leading-normal
+  }
+}
