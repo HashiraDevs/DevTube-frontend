@@ -1,7 +1,7 @@
 
 const AuthLayout = ({children}) => {
   return (
-    <main className='w-1512 h-982'>
+    <main>
         {children}
     </main>
   )
