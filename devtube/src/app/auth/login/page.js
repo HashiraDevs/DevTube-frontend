@@ -1,17 +1,46 @@
 'use client'
 import Link from "next/link"
-
+import {useRouter} from 'next/navigation'
 import { useState } from "react"
+
+
+
 const LoginPage = () => {
   const [email, setEmail]=useState('')
   const [password, setPassword]=useState('')
   const[isloading, setIsloading]=useState(false)
-
   
+  const router = useRouter()
+
+  function sendData(data){
+    const url = 'https://jsonplaceholder.typicode.com/posts'
+    fetch(url,{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response =>{
+      if(!response.ok){
+        throw new Error('Login Failed')
+      } else{
+       return response.json()
+      }
+    })
+    .then(()=>{
+      return router.push('/')
+    })
+    .catch( err =>{
+      console.log(err)
+    })
+  }
+
   const handleSubmit=(e)=>{
     e.preventDefault()
     setIsloading(true)
     const loginDetails={email,password}
+    sendData(loginDetails)
 
 
   }
