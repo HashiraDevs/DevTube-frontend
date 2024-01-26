@@ -2,3 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --oxford-blue:#012351;
+  --bleu-de-France:#008BF8;
+  --light-cyan:#DFF5F6;
+  --primary-color:#FFF;
+
+  --secondary-text:var(--bleu-de-France);
+
+  --primary-btn-bg: var(--bleu-de-France);
+  --primary-btn-text: var(--primary-color);
+}
+
+@layer components{
+  .input{
+    @apply flex flex-col items-start gap-2
+  }
+  .input label{
+    @apply font-normal text-base leading-normal block
+  }
+  .input input{
+    @apply border border-black border-solid w-[18.75rem] h-[2.5rem] rounded-[1.375rem] p-5 focus:border mb-2
+  }
+  .primary-btn-large{
+    @apply flex w-[18.75rem] px-[7rem] py-[0.625rem] items-center justify-center gap-[0.625rem] rounded-full bg-[var(--primary-btn-bg)] text-[var(--primary-btn-text)] text-center text-[1rem] font-bold leading-normal
+  }
+}
