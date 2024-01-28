@@ -2,6 +2,8 @@
 import Link from "next/link"
 import {useRouter} from 'next/navigation'
 import { useState } from "react"
+import { HiEye } from "react-icons/hi";
+import { HiEyeOff} from "react-icons/hi";
 
 
 
@@ -11,6 +13,12 @@ const LoginPage = () => {
   const[isloading, setIsloading]=useState(false)
   
   const router = useRouter()
+
+  const [showPassword, setShowPassword] = useState(false)
+
+  const handleShowPassword = (e) => {
+    setShowPassword(!showPassword)
+  }
 
   function sendData(data){
     const url = 'https://jsonplaceholder.typicode.com/posts'
@@ -61,15 +69,19 @@ const LoginPage = () => {
           />
         </div>
 
-        <div className="input">
-          <label className="input label">Password</label>
+        <div className="input relative">
+          <label>Password</label>
           <input
-          type="password"
-          className="input input"
+          type={showPassword?'text' : 'password'}
           required
           value={password}
           onChange={(e)=>setPassword(e.target.value)}
           />
+          <span className='text-1xl absolute top-11 right-5'>
+                {
+                  (showPassword === false)? <HiEyeOff onClick={handleShowPassword} /> : <HiEye onClick={handleShowPassword}/>
+                }
+              </span>
         </div>
 
         <button disabled={isloading} className="primary-btn-large">
