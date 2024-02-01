@@ -22,11 +22,12 @@
     @apply font-normal text-base leading-normal block
   }
   .input input{
-    @apply border border-black border-solid w-[18.75rem] h-[2.5rem] rounded-[1.375rem] p-5 focus:border
+    @apply border border-black border-solid w-[18.75rem] h-[2.5rem] rounded-[1.375rem] p-5 focus:border mb-2
   }
   .primary-btn-large{
     @apply flex w-[18.75rem] px-[7rem] py-[0.625rem] items-center justify-center gap-[0.625rem] rounded-full bg-[var(--primary-btn-bg)] text-[var(--primary-btn-text)] text-center text-[1rem] font-bold leading-normal
   }
+ loginFeature
   @media (prefers-reduced-motion: no-preference) {
     .rotation {
       animation: loading infinite 4s linear;}
@@ -39,3 +40,6 @@
       transform: rotate(360deg);}
   }
 }
+
+}
+main
