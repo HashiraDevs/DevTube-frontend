@@ -6,56 +6,47 @@ import { HiEye } from "react-icons/hi";
 import { HiEyeOff} from "react-icons/hi";
 
 
+import { setStorage } from "@/app/GlobalRedux/slices/authSlice";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { useLoginMutation } from "@/app/GlobalRedux/slices/tokenApiSlice";
 
 const LoginPage = () => {
-  const [email, setEmail]=useState('')
+  const [username, setEmail]=useState('')
   const [password, setPassword]=useState('')
   const[isloading, setIsloading]=useState(false)
   
-  const router = useRouter()
-
-  const [showPassword, setShowPassword] = useState(false)
-
+  const [showPassword, setShowPassword] = useState(false) 
+  
   const handleShowPassword = (e) => {
     setShowPassword(!showPassword)
   }
 
-  useEffect(() => {
-    console.log('render');
-  }, []);
+  const router = useRouter()
 
-  function sendData(data){
-    const url = 'https://jsonplaceholder.typicode.com/posts'
-    fetch(url,{
-      method:'POST',
-      headers:{
-        'Content-Type':'application/json'
-      },
-      body: JSON.stringify(data)
-    })
-    .then(response =>{
-      if(!response.ok){
-        throw new Error('Login Failed')
-      } else{
-       return response.json()
+  const dispatch = useDispatch()
+  const [ login ] = useLoginMutation()
+  
+
+
+
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      setIsloading(true);
+      const loginDetails = { username, password };
+  
+      try {
+        const response = await login(loginDetails).unwrap();
+        dispatch(setStorage({ ...response }));
+        console.log(response);
+        router.push('/');
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setIsloading(false);
       }
-    })
-    .then(()=>{
-      return router.push('/')
-    })
-    .catch( err =>{
-      console.log(err)
-    })
-  }
-
-  const handleSubmit=(e)=>{
-    e.preventDefault()
-    setIsloading(true)
-    const loginDetails={email,password}
-    sendData(loginDetails)
-
-
-  }
+    };
+  
 
   return (
     <div className="mt-10">
@@ -66,10 +57,10 @@ const LoginPage = () => {
           <label className="input">Email</label>
           <input
           className=" input"
-          type="email"
+          type="text"
           required
-          value={email}
-          onChange={(e)=>setEmail(e.target.value)}
+          value={username}
+          onChange={(e)=>{setEmail(e.target.value)}}
           />
         </div>
 
@@ -78,6 +69,7 @@ const LoginPage = () => {
           <input
           type={showPassword?'text' : 'password'}
           required
+          name="password"
           value={password}
           onChange={(e)=>setPassword(e.target.value)}
           />
@@ -100,3 +92,30 @@ const LoginPage = () => {
 }
 
 export default LoginPage
+
+
+
+
+  // function sendData(data){
+  //   const url = 'https://jsonplaceholder.typicode.com/posts'
+  //   fetch(url,{
+  //     method:'POST',
+  //     headers:{
+  //       'Content-Type':'application/json'
+  //     },
+  //     body: JSON.stringify(data)
+  //   })
+  //   .then(response =>{
+  //     if(!response.ok){
+  //       throw new Error('Login Failed')
+  //     } else{
+  //      return response.json()
+  //     }
+  //   })
+  //   .then(()=>{
+  //     return router.push('/')
+  //   })
+  //   .catch( err =>{
+  //     console.log(err)
+  //   })
+  // }
