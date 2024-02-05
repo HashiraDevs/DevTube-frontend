@@ -141,7 +141,7 @@ const SignupPage = () => {
                     <GoogleSignIn/> */}
           <p>Already have an account? <Link className="text-[color:var(--secondary-text)]" href={'./login'}>Log In</Link></p>
         </div>
-      </div>
+        about:blank      </div>
  )
 
 }
