@@ -27,7 +27,7 @@
   .primary-btn-large{
     @apply flex w-[18.75rem] px-[7rem] py-[0.625rem] items-center justify-center gap-[0.625rem] rounded-full bg-[var(--primary-btn-bg)] text-[var(--primary-btn-text)] text-center text-[1rem] font-bold leading-normal
   }
- loginFeature
+
   @media (prefers-reduced-motion: no-preference) {
     .rotation {
       animation: loading infinite 4s linear;}
@@ -41,5 +41,3 @@
   }
 }
 
-}
-main
