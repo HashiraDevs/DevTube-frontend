@@ -1,10 +1,11 @@
 'use client'
 import { createSlice } from "@reduxjs/toolkit";
 
+const tokensFromStorage = localStorage.getItem('tokens')
 let initialState;
-if (localStorage.getItem('tokens')) {
+if (tokensFromStorage) {
   initialState = {
-    tokens: JSON.parse(localStorage.getItem('tokens'))
+    tokens: JSON.parse(tokensFromStorage)
   };
 } else {
   initialState = {
