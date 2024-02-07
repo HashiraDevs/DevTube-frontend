@@ -1,4 +1,5 @@
 "use client"
+import { useGetUsersQuery, useAddUsersMutation } from '@/app/GlobalRedux/signup/slices/apiSlice
 
 import React, { useState, useEffect } from 'react'
 import {useRouter} from 'next/navigation'
@@ -16,7 +17,7 @@ const SignupPage = () => {
       email :"",
       password :"",
       confirmpassword :"",
-  }) 
+  })
 
   const[isloading, setIsloading]=useState(false)
 
@@ -31,24 +32,25 @@ const SignupPage = () => {
     })
   };
   
-  const router = useRouter(); 
+  // const router = useRouter(); 
   // redirection to homepage after successfull SIGNUP
-  //   useEffect(() => {
-    //    if (isFormValid) {
-      //      router.push('/');
-      //    }
-      //  }, [isFormValid, router]);
-      
-      const handleOnClick = (e) =>{
-        e.preventDefault();
-        setErrors(Validation(value));
-      const isValid = Object.keys(errors).length === 0;
-      setIsFormValid(isValid);
+//   useEffect(() => {
+//    if (isFormValid) {
+//      router.push('/');
+//    }
+//  }, [isFormValid, router]);
 
-      // if (isValid) {
-      //   router.push('/');
-      // }
-    };
+const handleOnClick = (e) =>{
+  e.preventDefault();
+  const errors = Validation(value);
+  setErrors(errors);
+  const isValid = Object.keys(errors).length === 0;
+  setIsFormValid(isValid);
+
+  if (isValid) {
+    addUsers(value)
+  }
+};
 
     const [showPassword, setShowPassword] = useState(false)
 
@@ -131,8 +133,8 @@ const SignupPage = () => {
             </div>
             {errors.confirmpassword && <p className='text-red-600 text-left'>{errors.confirmpassword}</p>}
           </div>
-          <button disabled={isloading} className="primary-btn-large">
-            {isloading ?<span>LOADING...</span>:<span>SIGN UP</span>}
+          <button disabled={isloading || Object.keys(errors).length > 0} className="primary-btn-large">
+            {isloading ?<span>{contet}</span>:<span>SIGN UP</span>}
           </button>
         </form>
         <div className='flex flex-col justify-center'>
