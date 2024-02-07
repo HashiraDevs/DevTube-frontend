@@ -9,8 +9,15 @@ export const tokenApiSlice = apiSlice.injectEndpoints({
         method:'POST',
         body:credentials,
       })
+    }),
+    refresh:builder.mutation({
+      query:(refreshToken)=>({
+        url:'api/token/refresh/',
+        method:'POST',
+        body:refreshToken,
+      })
     })
   })
 })
 
-export const { useLoginMutation } = tokenApiSlice
+export const { useLoginMutation,useRefreshMutation } = tokenApiSlice
