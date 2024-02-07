@@ -1,4 +1,5 @@
 "use client"
+import { useGetUsersQuery, useAddUsersMutation } from '@/app/GlobalRedux/signup/slices/apiSlice'
 import React, { useState, useEffect } from 'react'
 import {useRouter} from 'next/navigation'
 import Validation from './Validation'
@@ -15,7 +16,7 @@ const SignupPage = () => {
       email :"",
       password :"",
       confirmpassword :"",
-  }) 
+  })
 
   const[isloading, setIsloading]=useState(false)
 
@@ -38,16 +39,17 @@ const SignupPage = () => {
 //    }
 //  }, [isFormValid, router]);
 
-    const handleOnClick = (e) =>{
-      e.preventDefault();
-      setErrors(Validation(value));
-      const isValid = Object.keys(errors).length === 0;
-      setIsFormValid(isValid);
+const handleOnClick = (e) =>{
+  e.preventDefault();
+  const errors = Validation(value);
+  setErrors(errors);
+  const isValid = Object.keys(errors).length === 0;
+  setIsFormValid(isValid);
 
-      // if (isValid) {
-      //   router.push('/');
-      // }
-    };
+  if (isValid) {
+    addUsers(value)
+  }
+};
 
     const [showPassword, setShowPassword] = useState(false)
 
@@ -126,8 +128,8 @@ const SignupPage = () => {
               </span>
             {errors.confirmpassword && <p className='text-red-600 text-left'>{errors.confirmpassword}.</p>}
           </div>
-          <button disabled={isloading} className="primary-btn-large">
-            {isloading ?<span>LOADING...</span>:<span>SIGN UP</span>}
+          <button disabled={isloading || Object.keys(errors).length > 0} className="primary-btn-large">
+            {isloading ?<span>{contet}</span>:<span>SIGN UP</span>}
           </button>
           <p className="mb-3">or</p>
          {/* adding the sign in with google button
