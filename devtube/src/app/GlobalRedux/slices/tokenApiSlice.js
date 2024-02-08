@@ -5,14 +5,14 @@ export const tokenApiSlice = apiSlice.injectEndpoints({
   endpoints:(builder) =>({
     login:builder.mutation({
       query:(credentials)=>({
-        url:'api/token/',
+        url:'auth/jwt/create/',
         method:'POST',
         body:credentials,
       })
     }),
     refresh:builder.mutation({
       query:(refreshToken)=>({
-        url:'api/token/refresh/',
+        url:'auth/jwt/refresh/',
         method:'POST',
         body:refreshToken,
       })
