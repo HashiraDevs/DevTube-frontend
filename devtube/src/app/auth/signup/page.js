@@ -1,5 +1,5 @@
 "use client"
-import { useGetUsersQuery, useAddUsersMutation } from '@/app/GlobalRedux/signup/slices/apiSlice
+import { useGetUsersQuery, useAddUsersMutation } from '@/app/GlobalRedux/signup/slices/apiSlice'
 
 import React, { useState, useEffect } from 'react'
 import {useRouter} from 'next/navigation'
